@@ -31,8 +31,7 @@ function onPromiseCreate(evt) {
   let amount = Number(refs.amount.value);
 
   for (let i = 1; i <= amount; i += 1) {
-    let promiseDelay = valueDelay + step * i;
-
+    let promiseDelay = valueDelay;
     createPromise(i, promiseDelay)
       .then(({ position, delay }) => {
         Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
@@ -40,5 +39,6 @@ function onPromiseCreate(evt) {
       .catch(({ position, delay }) => {
         Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
       });
+    valueDelay += step;
   }
 }
